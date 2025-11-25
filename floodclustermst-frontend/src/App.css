@@ -1,0 +1,154 @@
+/* src/App.css */
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background-color: #f5f5f5;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app-header {
+  padding: 16px 24px;
+  background: #1f2933;
+  color: white;
+}
+
+.app-header h1 {
+  margin: 0;
+}
+
+.health-info {
+  margin-top: 8px;
+  font-size: 0.9rem;
+}
+
+.app-body {
+  display: flex;
+  padding: 16px;
+  gap: 16px;
+  flex: 1;
+}
+
+.controls {
+  flex: 0 0 260px;
+  background: white;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.controls h2 {
+  margin-top: 0;
+}
+
+.controls label {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9rem;
+  gap: 4px;
+}
+
+.controls input[type="number"] {
+  padding: 4px 6px;
+}
+
+.checkbox-label {
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+
+.controls button {
+  margin-top: 8px;
+  padding: 8px 12px;
+  border-radius: 4px;
+  border: none;
+  background-color: #1f77b4;
+  color: white;
+  cursor: pointer;
+}
+
+.controls button:hover {
+  background-color: #155a85;
+}
+
+.main-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.error-banner {
+  background-color: #f97373;
+  color: #5b1313;
+  padding: 8px 12px;
+  border-radius: 4px;
+}
+
+.loading-banner {
+  background-color: #fffbdd;
+  color: #7c6f1f;
+  padding: 8px 12px;
+  border-radius: 4px;
+}
+
+/* Grid */
+
+.grid-container {
+  display: inline-block;
+  background: white;
+  padding: 8px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  overflow: auto;
+}
+
+.grid-row {
+  display: flex;
+}
+
+.grid-cell {
+  width: 16px;
+  height: 16px;
+  border: 1px solid #ffffff;
+  box-sizing: border-box;
+}
+
+.grid-cell.empty {
+  background-color: #eeeeee;
+}
+
+/* Cluster stats */
+
+.cluster-stats {
+  background: white;
+  padding: 8px 12px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.cluster-stats h2 {
+  margin-top: 0;
+}
+
+.cluster-stats table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.cluster-stats th,
+.cluster-stats td {
+  border: 1px solid #ddd;
+  padding: 4px 6px;
+  text-align: center;
+}
