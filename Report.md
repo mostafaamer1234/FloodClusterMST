@@ -1,6 +1,6 @@
 # FloodClusterMST
 
-**Author:** Mostafa Tarek & Faahil Ali  
+**Authors:** Mostafa Tarek & Faahil Ali  
 **Course:** CMPSC 463 — Project 2
 
 ## Description of Project
