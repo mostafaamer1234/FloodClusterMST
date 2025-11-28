@@ -129,7 +129,7 @@ Steps:
 This method is a common approach in MST based clustering and works well for geographic data.
 
 
-## Verification of Algorithms with Toy Examples
+## Verification of Algorithms
 
 We tested the algorithms on a few small, controlled examples before applying them to the full 20×20 grid. These toy examples make it easier to see whether Kruskal’s algorithm, Union–Find, and the cluster splitting step are all working correctly.
 
