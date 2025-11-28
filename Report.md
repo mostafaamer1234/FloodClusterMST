@@ -5,9 +5,9 @@
 
 ## Description of Project
 
-FloodClusterMST is an interactive web application that models flood-risk clustering on a synthetic 20×20 grid. Each cell on the grid represents a location with its own elevation, risk score, and position. The backend builds a weighted graph from these locations and uses Kruskal’s Minimum Spanning Tree algorithm to connect them in the most cost-efficient way. By removing the largest edges in the MST, the system separates the grid into clusters that reflect similarities in terrain and flood risk.
+FloodClusterMST is an interactive web application that models flood risk clustering on a synthetic 20×20 grid. Each cell on the grid represents a location with its own elevation, risk score, and position. The backend builds a weighted graph from these locations and uses Kruskal’s Minimum Spanning Tree algorithm to connect them in the most cost efficient way. By removing the largest edges in the MST, the system separates the grid into clusters that reflect similarities in terrain and flood risk.
 
-The goal of the project is to take ideas from algorithmic design and apply them to a weather-related scenario. Users can adjust settings such as elevation weight, risk weight, distance weight, and the number of clusters to observe how these choices affect the final grouping of the grid.
+The goal of the project is to take ideas from algorithmic design and apply them to a weather related scenario. Users can adjust settings such as elevation weight, risk weight, distance weight, and the number of clusters to observe how these choices affect the final grouping of the grid.
 
 ## Significance
 
@@ -88,7 +88,7 @@ This structure allows Kruskal’s algorithm to run efficiently even on hundreds 
 
 ### Edge Weight Function
 
-Each edge in the grid graph is assigned a weight based on how different two neighboring cells are. The formula combines three components: elevation difference, flood-risk difference, and the Euclidean distance between the cells on the grid. The user controls how important each factor is through the weights set in the frontend.
+Each edge in the grid graph is assigned a weight based on how different two neighboring cells are. The formula combines three components: elevation difference, flood risk difference, and the Euclidean distance between the cells on the grid. The user controls how important each factor is through the weights set in the frontend.
 
 ```python
 weight = (
@@ -126,7 +126,7 @@ Steps:
 3) Remove the (k − 1) largest edges
 4) The remaining connected components form the k clusters
 
-This method is a common approach in MST-based clustering and works well for geographic data.
+This method is a common approach in MST based clustering and works well for geographic data.
 
 
 ## Verification of Algorithms with Toy Examples
@@ -163,12 +163,12 @@ The resulting MST contains the edges *AB, CD, AD,* with a total weight of *6*.
 If we want to split this graph into k = 2 clusters, we remove the largest MST edge, which is AD. This leaves two connected components:
 - *{A, B} and {C, D}*
 
-This validates the core MST and cluster splitting logic are working as expected.
+This validates that the core MST and cluster splitting logic are working as expected.
 
 
 ### Toy Example B: Weighted MST with Elevation, Risk, Distance
 
-This example checks whether the weighted edge formula behaves correctly. Each node has an elevation value and a flood-risk value:
+This example checks whether the weighted edge formula behaves correctly. Each node has an elevation value and a flood risk value:
 | Node | Elevation | Risk |
 | ---- | --------- | ---- |
 | A    | 10        | 0.2  |
@@ -182,22 +182,20 @@ Weights:
 - distance = 0 (ignored for simplicity)
 
 Now we compute the edge weights:
-Edge A-B
-- Elevation diff = 1
-- Risk diff = 0.1
-- Weight = 1*(1) + 2*(0.1) = 1.2
+Edge A–B:
+- Elevation difference = 1  
+- Risk difference = 0.1  
+- Weight = 1 + 0.2 = 1.2  
 
+Edge C–D:
+- Elevation difference = 1  
+- Risk difference = 0.1  
+- Weight = 1.2  
 
-Edge C-D is similar:
-
-- Elevation diff = 1
-- Risk diff = 0.1
-- Weight = 1.2
-
-Edge B-C:
-- Elevation diff = 19
-- Risk diff = 0.6
-- Weight = 119 + 20.6 = 20.2
+Edge B–C:
+- Elevation difference = 19  
+- Risk difference = 0.6  
+- Weight = 19 + 1.2 = 20.2  
 
 From these calculations, A–B and C–D are clearly the lowest weight edges. The MST will connect those two pairs first. The next smallest connection depends on which remaining edge has the lowest weight.
 
@@ -205,9 +203,9 @@ This example shows that the weighted formula behaves properly. Nodes that are si
 
 ## Functionalities of the System
 
-The application provides an interactive way to explore how flood-risk clusters form on a 20×20 grid. Every cell in the grid contains two values, elevation and risk. The frontend visualizes the entire grid by coloring each cell according to the cluster it belongs to. Users can control how the clusters are formed by adjusting several parameters, such as the number of clusters (k) and the weights for elevation, risk, and spatial distance. Once the user updates any of these values and recomputes, the system calculates the MST on the backend and immediately updates the visualization.
+The application provides an interactive way to explore how flood risk clusters form on a 20×20 grid. Every cell in the grid contains two values, elevation and risk. The frontend visualizes the entire grid by coloring each cell according to the cluster it belongs to. Users can control how the clusters are formed by adjusting several parameters, such as the number of clusters (k) and the weights for elevation, risk, and spatial distance. Once the user updates any of these values and recomputes, the system calculates the MST on the backend and immediately updates the visualization.
 
-A key feature of the system is the option to enable or disable diagonal neighbors. Normally, each cell connects only to its four direct neighbors (up, down, left, right). When diagonal neighbors are enabled, each cell gains up to four extra connections, which makes the graph denser and gives the MST more options when selecting low-weight edges. This usually creates smoother, more rounded clusters. When diagonals are disabled, clusters tend to form more blocky, grid-aligned shapes. Even though it looks like a small toggle, it has a noticeable effect on how the MST grows and how the final clusters look.
+A key feature of the system is the option to enable or disable diagonal neighbors. Normally, each cell connects only to its four direct neighbors (up, down, left, right). When diagonal neighbors are enabled, each cell gains up to four extra connections, which makes the graph denser and gives the MST more options when selecting low weight edges. This usually creates smoother, more rounded clusters. When diagonals are disabled, clusters tend to form more blocky, grid aligned shapes. Even though it looks like a small toggle, it has a noticeable effect on how the MST grows and how the final clusters look.
 
 After computing the clusters, the frontend also displays a table of statistics for each region. This includes the cluster’s color, the number of nodes inside it, and the average elevation and risk score. Seeing both the visual grid and the numerical summaries helps explain how the algorithm is grouping locations.
 
@@ -241,7 +239,7 @@ Putting everything together, the space requirements grow with the number of node
 
 After completing both the backend and frontend, the system was tested using a variety of parameter settings to observe how the MST and clustering respond to different conditions. The goal was to analyze how elevation, flood risk, spatial distance, and the diagonal neighbor option influence the structure of the clusters on the 20×20 grid.
 
-The weight settings had a clear impact on how the MST formed. When elevation weight was increased, the MST tended to connect cells with similar elevation, which produced clusters that followed gradual terrain changes across the grid. Increasing the risk weight created clusters that grouped together high-risk or low-risk areas, depending on the distribution of the synthetic data. When the distance weight was made larger, the MST strongly avoided long connections, which resulted in clusters that were tighter and more compact. These observations matched the expected behavior of the weight function in the backend.
+The weight settings had a clear impact on how the MST formed. When elevation weight was increased, the MST tended to connect cells with similar elevation, which produced clusters that followed gradual terrain changes across the grid. Increasing the risk weight created clusters that grouped together high risk or low risk areas, depending on the distribution of the synthetic data. When the distance weight was made larger, the MST strongly avoided long connections, which resulted in clusters that were tighter and more compact. These observations matched the expected behavior of the weight function in the backend.
 
 Below is an example of the clustered grid under the default settings:
 
@@ -259,7 +257,7 @@ Here is the error message that appears when k is too large:
 </p>
 
 
-A separate set of tests focused on the diagonal neighbor option. With diagonal connections disabled, the graph was more grid-aligned and clusters tended to have sharper, block-like boundaries. When diagonal neighbors were enabled, each cell had more possible connections, which allowed the MST to find smoother paths. This produced clusters with more rounded or blended shapes. Even though this setting is simple, it consistently changed how the MST grew, making it easy to see how graph density influences the final clustering.
+A separate set of tests focused on the diagonal neighbor option. With diagonal connections disabled, the graph was more grid aligned and clusters tended to have sharper, block like boundaries. When diagonal neighbors were enabled, each cell had more possible connections, which allowed the MST to find smoother paths. This produced clusters with more rounded or blended shapes. Even though this setting is simple, it consistently changed how the MST grew, making it easy to see how graph density influences the final clustering.
 
 The interface below shows the parameters used for recomputing clusters during testing:
 
@@ -281,9 +279,9 @@ Overall, the results aligned with the theoretical behavior of Kruskal’s MST an
 
 ## Conclusions
 
-This project brought together graph algorithms, clustering techniques, and a real-time interactive interface to explore how terrain and flood-risk factors can influence regional grouping. By combining Kruskal’s MST with adjustable weights for elevation, risk, and spatial distance, the system was able to generate clusters that reacted in predictable but visually meaningful ways. The frontend made those patterns easy to understand, and testing showed that the backend and frontend communicated reliably under different parameter settings.
+This project brought together graph algorithms, clustering techniques, and a real time interactive interface to explore how terrain and flood risk factors can influence regional grouping. By combining Kruskal’s MST with adjustable weights for elevation, risk, and spatial distance, the system was able to generate clusters that reacted in predictable but visually meaningful ways. The frontend made those patterns easy to understand, and testing showed that the backend and frontend communicated reliably under different parameter settings.
 
-While the system works well for synthetic data, there is still room to grow. Future versions could incorporate real elevation and flood-risk datasets, experiment with different distance metrics, or even replace the synthetic grid with a real map. It would also be interesting to compare MST-based clustering with other approaches, such as k means or density based methods, to see how the results differ. Overall, the project successfully demonstrated how algorithmic tools can be applied to weather related risk analysis, and it provides a solid foundation for more advanced exploration.
+While the system works well for synthetic data, there is still room to grow. Future versions could incorporate real elevation and flood risk datasets, experiment with different distance metrics, or even replace the synthetic grid with a real map. It would also be interesting to compare MST based clustering with other approaches, such as k means or density based methods, to see how the results differ. Overall, the project successfully demonstrated how algorithmic tools can be applied to weather related risk analysis, and it provides a solid foundation for more advanced exploration.
 
 ## Video Demonstration
 Link: 
