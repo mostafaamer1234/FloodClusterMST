@@ -5,7 +5,7 @@
 
 ## Description of Project
 
-FloodClusterMST is an interactive web application that models flood risk clustering on a synthetic 20×20 grid. Each cell on the grid represents a location with its own elevation, risk score, and position. The backend builds a weighted graph from these locations and uses Kruskal’s Minimum Spanning Tree algorithm to connect them in the most cost efficient way. By removing the largest edges in the MST, the system separates the grid into clusters that reflect similarities in terrain and flood risk.
+FloodClusterMST is an interactive web application that models flood risk clustering on a 20×20 grid. Each cell on the grid represents a location with its own elevation, risk score, and position. The backend builds a weighted graph from these locations and uses Kruskal’s Minimum Spanning Tree algorithm to connect them in the most cost efficient way. By removing the largest edges in the MST, the system separates the grid into clusters that reflect similarities in terrain and flood risk.
 
 The goal of the project is to take ideas from algorithmic design and apply them to a weather related scenario. Users can adjust settings such as elevation weight, risk weight, distance weight, and the number of clusters to observe how these choices affect the final grouping of the grid.
 
