@@ -284,4 +284,6 @@ This project brought together graph algorithms, clustering techniques, and a rea
 While the system works well for synthetic data, there is still room to grow. Future versions could incorporate real elevation and flood risk datasets, experiment with different distance metrics, or even replace the synthetic grid with a real map. It would also be interesting to compare MST based clustering with other approaches, such as k means or density based methods, to see how the results differ. Overall, the project successfully demonstrated how algorithmic tools can be applied to weather related risk analysis, and it provides a solid foundation for more advanced exploration.
 
 ## Video Demonstration
-Link: 
+
+https://github.com/user-attachments/assets/156f4516-c4f9-4238-ad20-11e508cfec0f
+
