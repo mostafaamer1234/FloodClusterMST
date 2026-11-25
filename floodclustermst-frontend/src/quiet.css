@@ -78,7 +78,7 @@ a:hover { text-decoration: underline; }
 .q-lede { font-size: 21px; line-height: 1.38; color: var(--ink-2); max-width: 40ch; margin: 22px 0 0; letter-spacing: -0.02em; }
 
 /* Section rhythm */
-.q-section { padding: 72px 0; }
+.q-section { padding-top: 72px; padding-bottom: 72px; }
 .q-section + .q-section { border-top: 1px solid var(--hair-soft); }
 .q-h2 { font-size: 40px; line-height: 1.1; font-weight: 600; letter-spacing: -0.03em; margin: 0 0 28px; }
 .q-h3 { font-size: 21px; font-weight: 600; letter-spacing: -0.02em; margin: 0 0 6px; }
@@ -155,7 +155,7 @@ a:hover { text-decoration: underline; }
 
 @media (max-width: 640px) {
   .q-hero { padding-top: 56px; padding-bottom: 24px; }
-  .q-section { padding: 52px 0; }
+  .q-section { padding-top: 52px; padding-bottom: 52px; }
   .q-h2 { font-size: 30px; }
   .q-figure .q-num { font-size: 44px; }
 }
