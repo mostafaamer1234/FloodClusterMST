@@ -1,5 +1,9 @@
 # FloodClusterMST
 
+![CI](https://github.com/mostafaamer1234/FloodClusterMST/actions/workflows/ci.yml/badge.svg)
+![Python](https://img.shields.io/badge/python-3.12-blue)
+![React](https://img.shields.io/badge/frontend-React-61dafb)
+
 **Authors:** Mostafa Amer & Faahil Ali  
 **Course:** CMPSC 463 — Project 2
 
@@ -287,3 +291,17 @@ While the system works well for synthetic data, there is still room to grow. Fut
 
 https://github.com/user-attachments/assets/156f4516-c4f9-4238-ad20-11e508cfec0f
 
+
+
+## Tests
+
+`floodclustermst_backend/tests/` holds 27 tests:
+- Kruskal's MST total weight is checked against `networkx.minimum_spanning_tree` on 20 random graphs.
+- Cutting the k−1 heaviest MST edges yields exactly k clusters, and every cut edge is at least as heavy as every kept edge.
+- Union-find behavior, invalid `k`, and deterministic grid generation.
+
+```bash
+cd floodclustermst_backend
+pip install -r requirements.txt pytest networkx
+pytest -q tests
+```
