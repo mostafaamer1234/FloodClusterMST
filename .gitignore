@@ -45,3 +45,5 @@ __pycache__/
 .pytest_cache/
 node_modules/
 floodclustermst-frontend/build/
+.vercel
+.env*

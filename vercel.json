@@ -1,0 +1,13 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "buildCommand": "cd floodclustermst-frontend && npm install --no-audit --no-fund && CI=false npm run build",
+  "outputDirectory": "floodclustermst-frontend/build",
+  "functions": {
+    "api/index.py": {
+      "maxDuration": 10,
+      "excludeFiles": "{floodclustermst-frontend/**,images/**,floodclustermst_backend/tests/**}"
+    }
+  },
+  "rewrites": [{ "source": "/api/(.*)", "destination": "/api/index" }]
+}

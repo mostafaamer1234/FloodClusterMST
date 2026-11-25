@@ -4,6 +4,8 @@
 ![Python](https://img.shields.io/badge/python-3.12-blue)
 ![React](https://img.shields.io/badge/frontend-React-61dafb)
 
+**Live demo: [floodclustermst.vercel.app](https://floodclustermst.vercel.app)**
+
 **Authors:** Mostafa Amer & Faahil Ali  
 **Course:** CMPSC 463 — Project 2
 
