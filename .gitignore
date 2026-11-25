@@ -43,3 +43,5 @@ __pycache__/
 *.py[cod]
 .venv/
 .pytest_cache/
+node_modules/
+floodclustermst-frontend/build/

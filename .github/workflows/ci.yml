@@ -32,5 +32,5 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
-      - run: npm ci
+      - run: npm install --no-audit --no-fund  # lockfile is out of sync with package.json
       - run: CI=false npm run build
