@@ -4,7 +4,7 @@
 ![Python](https://img.shields.io/badge/python-3.12-blue)
 ![React](https://img.shields.io/badge/frontend-React-61dafb)
 
-**Live demo: [floodclustermst.vercel.app](https://floodclustermst.vercel.app)**
+**Try it: [floodclustermst.vercel.app](https://floodclustermst.vercel.app)**. Paint your own terrain and flood risk (or start from a river valley, coastline or hills) and Kruskal's MST regroups it into planning regions as you draw. Export the regions as CSV.
 
 **Authors:** Mostafa Amer & Faahil Ali  
 **Course:** CMPSC 463 — Project 2

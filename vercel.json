@@ -9,5 +9,11 @@
       "excludeFiles": "{floodclustermst-frontend/**,images/**,floodclustermst_backend/tests/**}"
     }
   },
-  "rewrites": [{ "source": "/api/(.*)", "destination": "/api/index" }]
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/index"
+    }
+  ],
+  "cleanUrls": true
 }

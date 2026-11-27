@@ -62,3 +62,21 @@ def test_disjoint_set_union_find():
 
 def test_grid_generation_is_deterministic():
     assert generate_grid_nodes(seed=7) == generate_grid_nodes(seed=7)
+
+
+def test_compute_accepts_a_custom_terrain():
+    from app import app
+
+    w, h = 6, 4
+    nodes = [{"x": x, "y": y, "elevation": 100.0 if x < 3 else 5.0, "risk_score": 0.1 if x < 3 else 0.9} for y in range(h) for x in range(w)]
+    body = app.test_client().post("/api/compute", json={"k": 2, "width": w, "height": h, "nodes": nodes, "use_diagonals": False}).get_json()
+    left = {body["clusters"][str(y * w + x)] for y in range(h) for x in range(3)}
+    right = {body["clusters"][str(y * w + x)] for y in range(h) for x in range(3, w)}
+    assert len(left) == 1 and len(right) == 1 and left != right  # the cliff between x=2 and x=3 is the cut
+
+
+def test_custom_terrain_is_validated():
+    from app import app
+
+    resp = app.test_client().post("/api/compute", json={"k": 2, "width": 3, "height": 3, "nodes": [{"x": 0, "y": 0, "elevation": 1, "risk_score": 0}]})
+    assert resp.status_code == 400
