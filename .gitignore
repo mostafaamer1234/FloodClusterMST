@@ -38,3 +38,12 @@ node_modules/.cache/
 .DS_Store
 Thumbs.db
 
+
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+node_modules/
+floodclustermst-frontend/build/
+.vercel
+.env*

@@ -1,6 +1,9 @@
 // src/api.js
 
-const BASE_URL = "http://localhost:5000";
+// Same-origin "/api" in production (Vercel); the local Flask server during `npm start`.
+const BASE_URL =
+  process.env.REACT_APP_API_URL ??
+  (process.env.NODE_ENV === "development" ? "http://localhost:5000" : "");
 
 export async function fetchHealth() {
   const res = await fetch(`${BASE_URL}/api/health`);

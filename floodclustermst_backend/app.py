@@ -44,6 +44,33 @@ def get_nodes():
     return jsonify({"nodes": NODES})
 
 
+MAX_SIDE = 40
+
+
+def _custom_nodes(data):
+    """Validate a user-drawn terrain grid and return (nodes, width, height) in row-major id order."""
+    width, height = int(data["width"]), int(data["height"])
+    if not (2 <= width <= MAX_SIDE and 2 <= height <= MAX_SIDE):
+        raise ValueError(f"width and height must be between 2 and {MAX_SIDE}")
+    raw = data["nodes"]
+    if len(raw) != width * height:
+        raise ValueError(f"expected {width * height} nodes, got {len(raw)}")
+    grid = {}
+    for n in raw:
+        x, y = int(n["x"]), int(n["y"])
+        if not (0 <= x < width and 0 <= y < height):
+            raise ValueError(f"node ({x}, {y}) is outside the grid")
+        grid[(x, y)] = (float(n["elevation"]), min(1.0, max(0.0, float(n["risk_score"]))))
+    if len(grid) != width * height:
+        raise ValueError("every grid cell needs exactly one node")
+    nodes = []
+    for y in range(height):
+        for x in range(width):
+            elevation, risk = grid[(x, y)]
+            nodes.append({"id": y * width + x, "x": x, "y": y, "elevation": elevation, "risk_score": risk})
+    return nodes, width, height
+
+
 @app.route("/api/compute", methods=["POST"])
 def compute_clusters():
     """
@@ -82,31 +109,40 @@ def compute_clusters():
     except (TypeError, ValueError):
         return jsonify({"error": "Invalid parameter types"}), 400
 
+    # Optional custom terrain: {"width": W, "height": H, "nodes": [{"x", "y", "elevation", "risk_score"}, ...]}
+    nodes, width, height = NODES, GRID_WIDTH, GRID_HEIGHT
+    if data.get("nodes") is not None:
+        try:
+            nodes, width, height = _custom_nodes(data)
+        except (TypeError, ValueError, KeyError) as e:
+            return jsonify({"error": f"Invalid terrain: {e}"}), 400
+    num_nodes = len(nodes)
+
     if k < 1:
         return jsonify({"error": "k must be >= 1"}), 400
-    if k > NUM_NODES:
+    if k > num_nodes:
         return jsonify({"error": "k cannot exceed number of nodes"}), 400
 
     edges = build_grid_graph(
-        NODES,
-        width=GRID_WIDTH,
-        height=GRID_HEIGHT,
+        nodes,
+        width=width,
+        height=height,
         elevation_weight=elevation_weight,
         risk_weight=risk_weight,
         distance_weight=distance_weight,
         use_diagonals=use_diagonals,
     )
 
-    mst_edges = compute_mst(NUM_NODES, edges)
+    mst_edges = compute_mst(num_nodes, edges)
 
     try:
         cluster_labels, mst_with_cut_info = cluster_from_mst(
-            NUM_NODES, mst_edges, k
+            num_nodes, mst_edges, k
         )
     except ValueError as e:
         return jsonify({"error": str(e)}), 400
 
-    stats = compute_cluster_stats(NODES, cluster_labels)
+    stats = compute_cluster_stats(nodes, cluster_labels)
 
     params = {
         "k": k,
